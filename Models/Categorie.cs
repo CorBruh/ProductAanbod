@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ProductAanbod.Models
 {
-    public class Catogorie
+    public class Categorie
     {
         [Key]
         public int Id { get; set; }

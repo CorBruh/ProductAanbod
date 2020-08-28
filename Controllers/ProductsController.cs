@@ -44,9 +44,14 @@ namespace ProductAanbod.Controllers
         }
 
         // GET: Products/Create
+        // Get data from database to fill the dropdown lists for creating new Product
         public IActionResult Create()
         {
-            return View();
+            ProductViewModel vmProduct = new ProductViewModel();
+            vmProduct.Categorie = _context.Catogorie.ToList();
+            vmProduct.Verzekeraar = _context.Verzekeraar.ToList();
+
+            return View(vmProduct);
         }
 
         // POST: Products/Create
@@ -54,15 +59,20 @@ namespace ProductAanbod.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductNaam,Premie,Actief")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,ProductNaam,Premie,CategorieId,VerzekeraarId")] ProductViewModel vmProduct)
         {
             if (ModelState.IsValid)
             {
+                Product product = new Product();
+                product.ProductNaam = vmProduct.ProductNaam;
+                product.Premie = vmProduct.Premie;
+                product.Categorie = _context.Catogorie.Find(vmProduct.CategorieId);
+                product.Verzekeraar = _context.Verzekeraar.Find(vmProduct.VerzekeraarId);
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(vmProduct);
         }
 
         // GET: Products/Edit/5

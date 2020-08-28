@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ProductAanbod.Models
 {
-    public class Product
+    public class ProductViewModel
     {
         [Key]
         public int Id { get; set; }
@@ -19,15 +19,19 @@ namespace ProductAanbod.Models
         [Required(ErrorMessage = "Het veld 'Premie' is vereist.")]
         [Column(TypeName = "decimal(18,2)")]
         [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:n} €")]
+        [DisplayFormat(DataFormatString = "€ {0:n}")]
         public decimal Premie { get; set; }
 
         public bool Actief { get; set; }
 
-        public virtual Categorie Categorie { get; set; }
+        [Display(Name = "Categorie")]
+        public int CategorieId { get; set; }
+        public ICollection<Categorie> Categorie { get; set; }
 
         public virtual LaatstAangepast LaatstAangepast { get; set; }
 
-        public virtual Verzekeraar Verzekeraar { get; set; }
+        [Display(Name = "Verzekeraar")]
+        public int VerzekeraarId { get; set; }
+        public ICollection<Verzekeraar> Verzekeraar { get; set; }
     }
 }

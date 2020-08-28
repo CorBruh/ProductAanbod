@@ -9,6 +9,10 @@ namespace ProductAanbod.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -18,7 +22,7 @@ namespace ProductAanbod.Data
 
         public DbSet<Verzekeraar> Verzekeraar { get; set; }
 
-        public DbSet<Catogorie> Catogorie  { get; set; }
+        public DbSet<Categorie> Catogorie  { get; set; }
 
         public DbSet<LaatstAangepast> LaatstAangepast { get; set; }
     }
