@@ -1,10 +1,10 @@
-﻿@model ProductAanbod.Models.Product
+﻿@model ProductAanbod.Models.ProductViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Wijzigingen";
 }
 
-<h1>Edit</h1>
+<h1>Wijzigingen</h1>
 
 <h4>Product</h4>
 <hr />
@@ -19,26 +19,47 @@
                 <span asp-validation-for="ProductNaam" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Premie" class="control-label"></label>
-                <input asp-for="Premie" class="form-control" />
-                <span asp-validation-for="Premie" class="text-danger"></span>
+                <div class="row">
+                    <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        <label asp-for="Verzekeraar" class="control-label"></label>
+                        <select asp-for="VerzekeraarId" style="width:auto"
+                                class="form-control"
+                                asp-items="@(new SelectList(Model.Verzekeraar,"Id", "VerzekeraarNaam"))">
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Actief" /> @Html.DisplayNameFor(model => model.Actief)
-                </label>
+            <div class="form-group">
+                <label asp-for="PremiePerMaand" class="control-label"></label>
+                <input id="NoDot" asp-for="PremiePerMaand" class="form-control" />
+                <span asp-validation-for="PremiePerMaand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categorie" class="control-label"></label> :
+                @Html.DisplayFor(model => model.CategorieNaam)
+            </div>
+            <div class="form-group">
+                <label asp-for="GewijzigdDatum" class="control-label"></label> :
+                @Html.DisplayFor(model => model.GewijzigdDatum)
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label> :
+                @Html.DisplayFor(model => model.Email)
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Verwijderen</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Terug naar overzicht</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Currency.js"></script>
 }

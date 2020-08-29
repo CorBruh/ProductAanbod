@@ -9,7 +9,7 @@
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>
     <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Products", new { area = "" })">
             <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
     </li>
@@ -24,3 +24,14 @@ else
     </li>
 }
 </ul>
+<style>
+    #account, #registerForm {
+        position: fixed;
+        top: 18%;
+        left: 37%;
+        margin-top: -50px;
+        width: 40%;
+        z-index: 9;
+        background-color: white;
+    }
+</style>

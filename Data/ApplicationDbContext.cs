@@ -23,7 +23,5 @@ namespace ProductAanbod.Data
         public DbSet<Verzekeraar> Verzekeraar { get; set; }
 
         public DbSet<Categorie> Catogorie  { get; set; }
-
-        public DbSet<LaatstAangepast> LaatstAangepast { get; set; }
     }
 }

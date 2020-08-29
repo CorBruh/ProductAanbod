@@ -22,7 +22,7 @@
                     <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <label asp-for="Categorie" class="control-label"></label>
-                        <select asp-for="CategorieId"
+                        <select asp-for="CategorieId" style="width: auto;"
                                 class="form-control"
                                 asp-items="@(new SelectList(Model.Categorie,"Id", "CategorieNaam"))">
                         </select>
@@ -34,7 +34,7 @@
                     <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <label asp-for="Verzekeraar" class="control-label"></label>
-                        <select asp-for="VerzekeraarId"
+                        <select asp-for="VerzekeraarId" style="width: auto;"
                                 class="form-control"
                                 asp-items="@(new SelectList(Model.Verzekeraar,"Id", "VerzekeraarNaam"))">
                         </select>
@@ -42,9 +42,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Premie" class="control-label"></label>
-                <input id="NoDot" asp-for="Premie" class="form-control" />
-                <span asp-validation-for="Premie" class="text-danger"></span>
+                <label asp-for="PremiePerMaand" class="control-label"></label>
+                <input id="NoDot" asp-for="PremiePerMaand" class="form-control" />
+                <span asp-validation-for="PremiePerMaand" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" onclick="DotChecker();" />

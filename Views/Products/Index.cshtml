@@ -1,47 +1,90 @@
 ﻿@model IEnumerable<ProductAanbod.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ProductAanbod";
 }
 
-<h1>Index</h1>
+<h1>ProductAanbod</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Product aanmaken</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProductNaam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Premie)
+                @Html.DisplayNameFor(model => model.Categorie)
+            </th>
+            <th>
+                Laatst aangepast
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Verzekeraar)
+            </th>
+            <th>
+                Premie per jaar
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Actief)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductNaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Premie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actief)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductNaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categorie.CategorieNaam)
+                </td>
+                <td>
+                    @if (item.Email != null) {<text>@item.GewijzigdDatum.ToString("dd-MM-yyyy HH:mm")</text>} @item.Email
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Verzekeraar.VerzekeraarNaam)
+                </td>
+                <td>
+                    @(item.PremiePerMaand * 12)
+                </td>
+                <td>
+                    <input type="checkbox" class="testie" id="@(item.Id)" onclick="CheckboxChange(@item.Id)" @if (item.Actief == true) { <text>checked</text>; } >
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Wijzigen</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    function CheckboxChange(itemId) {
+        var checked = $('#' + itemId).is(":checked");
+        $.ajax({
+            url: '/Products/CheckboxChange',
+            type: 'GET',
+            datatype: 'json',
+            data: { id: itemId, isChecked: checked },
+            success: function (data) {
+                console.log(data.responseText);
+                location.reload();
+            },
+            error: function (data) {
+                alert(data.responseText);
+            }
+        });
+    };
+</script>
+

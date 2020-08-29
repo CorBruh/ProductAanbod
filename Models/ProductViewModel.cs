@@ -18,20 +18,31 @@ namespace ProductAanbod.Models
 
         [Required(ErrorMessage = "Het veld 'Premie' is vereist.")]
         [Column(TypeName = "decimal(18,2)")]
+        [Display(Name = "Premie per maand")]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "€ {0:n}")]
-        public decimal Premie { get; set; }
+        public decimal PremiePerMaand { get; set; }
 
         public bool Actief { get; set; }
 
         [Display(Name = "Categorie")]
         public int CategorieId { get; set; }
-        public ICollection<Categorie> Categorie { get; set; }
-
-        public virtual LaatstAangepast LaatstAangepast { get; set; }
+        [Display(Name = "Categorie")]
+        public string CategorieNaam { get; set; }
+        public virtual ICollection<Categorie> Categorie { get; set; }
 
         [Display(Name = "Verzekeraar")]
         public int VerzekeraarId { get; set; }
-        public ICollection<Verzekeraar> Verzekeraar { get; set; }
+        public virtual ICollection<Verzekeraar> Verzekeraar { get; set; }
+
+        [Display(Name = "Aangepast door")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Display(Name = "Laatst aangepast")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
+        public DateTime GewijzigdDatum { get; set; }
     }
 }

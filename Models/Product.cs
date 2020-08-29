@@ -17,17 +17,26 @@ namespace ProductAanbod.Models
         public string ProductNaam { get; set; }
 
         [Required(ErrorMessage = "Het veld 'Premie' is vereist.")]
+        [Display(Name = "Premie per maand")]
         [Column(TypeName = "decimal(18,2)")]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:n} €")]
-        public decimal Premie { get; set; }
+        public decimal PremiePerMaand { get; set; }
 
         public bool Actief { get; set; }
 
         public virtual Categorie Categorie { get; set; }
 
-        public virtual LaatstAangepast LaatstAangepast { get; set; }
-
         public virtual Verzekeraar Verzekeraar { get; set; }
+
+        [Display(Name = "Aangepast door")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Display(Name = "Laatst aangepast")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
+        public DateTime GewijzigdDatum { get; set; }
     }
 }
