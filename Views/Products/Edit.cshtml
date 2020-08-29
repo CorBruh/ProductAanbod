@@ -19,6 +19,10 @@
                 <span asp-validation-for="ProductNaam" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Categorie" class="control-label"></label> :
+                @Html.DisplayFor(model => model.CategorieNaam)
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
@@ -36,10 +40,6 @@
                 <span asp-validation-for="PremiePerMaand" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Categorie" class="control-label"></label> :
-                @Html.DisplayFor(model => model.CategorieNaam)
-            </div>
-            <div class="form-group">
                 <label asp-for="GewijzigdDatum" class="control-label"></label> :
                 @Html.DisplayFor(model => model.GewijzigdDatum)
             </div>
@@ -48,7 +48,7 @@
                 @Html.DisplayFor(model => model.Email)
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
                 <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Verwijderen</a>
             </div>
         </form>
